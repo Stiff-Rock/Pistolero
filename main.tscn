@@ -1,0 +1,123 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvk0ts5e7flee"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_7030a"]
+[ext_resource type="PackedScene" uid="uid://ya2p7wsswc18" path="res://player.tscn" id="1_uwq4j"]
+[ext_resource type="Texture2D" uid="uid://r1ci240bumn6" path="res://assets/art/reload.png" id="2_6ag6v"]
+[ext_resource type="PackedScene" uid="uid://c72ylqd0reb0x" path="res://hud.tscn" id="3_dubig"]
+[ext_resource type="PackedScene" uid="uid://br7eqkxlu3063" path="res://cpu.tscn" id="4_xm4cq"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_7030a")
+
+[node name="p1_win" type="CanvasLayer" parent="."]
+
+[node name="background" type="ColorRect" parent="p1_win"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.537255, 0.615686, 0.443137, 1)
+
+[node name="win_message" type="Label" parent="p1_win"]
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 62
+text = "P1 WINS!!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cpu_win" type="CanvasLayer" parent="."]
+
+[node name="background" type="ColorRect" parent="cpu_win"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.537255, 0.615686, 0.443137, 1)
+
+[node name="win_message" type="Label" parent="cpu_win"]
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 62
+text = "CPU WINS!!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game" type="CanvasLayer" parent="."]
+
+[node name="background" type="ColorRect" parent="Game"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.537255, 0.615686, 0.443137, 1)
+
+[node name="p1" type="Label" parent="Game"]
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 64
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="health_p1" type="Label" parent="Game"]
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 44
+text = "Vida:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="p2" type="Label" parent="Game"]
+offset_left = 896.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 64
+text = "P2
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="health_cpu" type="Label" parent="Game"]
+offset_left = 832.0
+offset_top = 192.0
+offset_right = 960.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 44
+text = "Vida:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="p1_action" type="Sprite2D" parent="Game"]
+position = Vector2(352, 128)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("2_6ag6v")
+
+[node name="cpu_action" type="Sprite2D" parent="Game"]
+position = Vector2(800, 128)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("2_6ag6v")
+
+[node name="Player" parent="." instance=ExtResource("1_uwq4j")]
+
+[node name="HUD" parent="." instance=ExtResource("3_dubig")]
+
+[node name="Cpu" parent="." instance=ExtResource("4_xm4cq")]
+
+[connection signal="game_over" from="." to="." method="end_game"]
+[connection signal="p1_dead" from="Player" to="." method="_on_player_p_1_dead"]
+[connection signal="new_game" from="HUD" to="." method="new_game"]
+[connection signal="cpu_dead" from="Cpu" to="." method="_on_cpu_cpu_dead"]

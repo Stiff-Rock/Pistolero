@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://ya2p7wsswc18"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_fxp34"]
+[ext_resource type="AudioStream" uid="uid://n1yvrkkk4qef" path="res://assets/sounds/shoot.mp3" id="2_q22v1"]
+[ext_resource type="AudioStream" uid="uid://cv53gy86sw7yq" path="res://assets/sounds/shield.mp3" id="3_elhyb"]
+[ext_resource type="AudioStream" uid="uid://bpgpvy8nt5lcw" path="res://assets/sounds/reload.mp3" id="4_xdbih"]
+
+[node name="Player" type="CanvasLayer"]
+script = ExtResource("1_fxp34")
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.537255, 0.615686, 0.443137, 1)
+
+[node name="shoot_button" type="Button" parent="."]
+offset_left = 304.0
+offset_top = 320.0
+offset_right = 488.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 39
+text = "Disparar"
+
+[node name="shoot_mp3" type="AudioStreamPlayer" parent="shoot_button"]
+stream = ExtResource("2_q22v1")
+
+[node name="shield_button" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 320.0
+offset_right = 648.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 39
+text = "Escudo
+"
+
+[node name="shield_mp3" type="AudioStreamPlayer" parent="shield_button"]
+stream = ExtResource("3_elhyb")
+
+[node name="reload_button" type="Button" parent="."]
+offset_left = 664.0
+offset_top = 320.0
+offset_right = 848.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 39
+text = "Recargar"
+
+[node name="reload_mp3" type="AudioStreamPlayer" parent="reload_button"]
+stream = ExtResource("4_xdbih")
+
+[node name="choose" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 152.0
+offset_right = 704.0
+offset_bottom = 280.0
+theme_override_font_sizes/font_size = 60
+text = "Elige:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="shoot_button" to="." method="_on_shoot_button_mouse_entered"]
+[connection signal="mouse_entered" from="shield_button" to="." method="_on_shield_button_mouse_entered"]
+[connection signal="mouse_entered" from="reload_button" to="." method="_on_reload_button_mouse_entered"]
